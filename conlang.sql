@@ -2,8 +2,8 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 04, 2020 at 06:20 AM
+-- Host: 127.0.0.1
+-- Generation Time: Aug 21, 2020 at 02:48 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -31,18 +31,21 @@ CREATE TABLE `conlangs` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `name_romanised` text DEFAULT NULL,
-  `script_id` int(11) DEFAULT NULL
+  `script_id` int(11) DEFAULT NULL,
+  `pronunciation` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `conlangs`
 --
 
-INSERT INTO `conlangs` (`id`, `name`, `name_romanised`, `script_id`) VALUES
-(1, 'dossin', 'Dossin', 1),
-(2, 'heizi', 'Heizi', NULL),
-(3, 'Proto-Tineba', NULL, NULL),
-(4, 'ᚾᛟᚱᛖᚾᛋ', 'Norens', NULL);
+INSERT INTO `conlangs` (`id`, `name`, `name_romanised`, `script_id`, `pronunciation`) VALUES
+(1, 'dossin', 'Dossïn', 1, 'dossyn'),
+(2, 'heizi', 'Heizi', 1, NULL),
+(3, 'Proto-Tineba', NULL, NULL, NULL),
+(4, 'ᚾᛟᚱᛖᚾᛋ', 'Norens', NULL, NULL),
+(19, 'The Homophonic Language', '', NULL, ''),
+(20, 'scroll test', '', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -64,7 +67,9 @@ INSERT INTO `editors` (`id`, `user_id`, `conlang_id`) VALUES
 (1, 6, 1),
 (2, 7, 4),
 (3, 8, 2),
-(4, 6, 2);
+(4, 6, 2),
+(44, 6, 19),
+(45, 6, 20);
 
 -- --------------------------------------------------------
 
@@ -93,7 +98,23 @@ INSERT INTO `meanings` (`id`, `word_id`, `pos`, `english`, `meaning`, `example`,
 (32, 15, 'verb', 'eat', NULL, NULL, NULL),
 (33, 16, 'noun', 'snow', '', NULL, NULL),
 (37, 1, 'verb', 'test', NULL, NULL, NULL),
-(38, 17, 'noun', 'oh no', 'oh no', NULL, NULL);
+(38, 17, 'noun', 'oh no', 'oh no', NULL, NULL),
+(45, 41, 'noun', 'red', NULL, NULL, NULL),
+(46, 45, 'noun', 'community', '', '<br />', NULL),
+(48, 45, 'noun', 'polity', 'Usually referring to small polities such as muncipalities alone', 'hey add affixes you egg', NULL),
+(49, 46, 'noun', 'fight', 'could be used to refer to a duel or formal arranged battle', NULL, NULL),
+(50, 47, 'verb', 'love', '(romantic)', NULL, NULL),
+(51, 48, 'noun', 'iron', NULL, NULL, NULL),
+(52, 49, 'noun', 'woman', NULL, NULL, NULL),
+(53, 55, 'noun', 'nature', '', NULL, NULL),
+(54, 58, 'noun', 'hair', 'commonly refers to facial hair but may be used to refer to animal hair as in fur', NULL, NULL),
+(55, 59, 'noun', 'hair', 'especially hair on the head', NULL, NULL),
+(56, 60, 'noun', 'eat', NULL, NULL, NULL),
+(57, 61, 'noun', 'drink', NULL, NULL, NULL),
+(58, 62, 'verb', 'free', '', NULL, NULL),
+(59, 63, 'noun', 'ground', NULL, NULL, NULL),
+(60, 64, 'verb', 'unite', NULL, NULL, NULL),
+(61, 65, 'noun', 'fish', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -158,11 +179,113 @@ CREATE TABLE `words` (
 INSERT INTO `words` (`id`, `conlang_id`, `name`, `name_romanised`, `pronunciation`, `script_id`) VALUES
 (1, 1, 'kaspak', 'kaspak', 'kaspak', NULL),
 (2, 1, 'fess', 'fess', 'fɛsː', NULL),
-(14, 1, 'vosï', NULL, 'vosy', NULL),
-(15, 1, 'eiski', NULL, 'eiski', NULL),
-(16, 1, 'poc', NULL, 'poʃ', NULL),
+(14, 1, 'vosï', 'vosy', 'vosy', NULL),
+(15, 1, 'eisk', 'eisk', 'eisk', NULL),
+(16, 1, 'poc', 'poc', 'poʃ', NULL),
 (17, 2, 'oh noo', NULL, 'word', NULL),
-(37, 3, 'proto-word', NULL, 'proto-word but how to pronounce it', NULL);
+(37, 3, 'proto-word', NULL, 'proto-word but how to pronounce it', NULL),
+(41, 1, 'cauz', 'cauz', 'ʃɐʊz', NULL),
+(45, 1, 'daus', 'daus', 'dɐʊs', NULL),
+(46, 1, 'conta', 'conta', 'ʃɔntɐ', NULL),
+(47, 1, 'doït', 'doyt', 'doyt', NULL),
+(48, 1, 'dosau', 'dosau', 'dɔsɐʊ', NULL),
+(49, 1, 'ecri', 'ecri', 'ɛʃɹɪ', NULL),
+(55, 1, 'cvates', 'cvates', 'ʃvates', NULL),
+(58, 1, 'patva', 'patva', 'patva', NULL),
+(59, 1, 'kase', 'kase', 'kase', NULL),
+(60, 19, 'homophone', '', 'a', NULL),
+(61, 19, 'homophone', NULL, 'a', NULL),
+(62, 1, 'pivi', 'pivi', 'pivi', NULL),
+(63, 1, 'poso', 'poso', 'poso', NULL),
+(64, 1, 'ruc', 'ruc', 'ruʃ', NULL),
+(65, 1, 'kjave', 'kjave', 'kjave', NULL),
+(66, 20, NULL, NULL, NULL, NULL),
+(67, 20, NULL, NULL, NULL, NULL),
+(68, 20, NULL, NULL, NULL, NULL),
+(69, 20, NULL, NULL, NULL, NULL),
+(70, 20, NULL, NULL, NULL, NULL),
+(71, 20, NULL, NULL, NULL, NULL),
+(72, 20, NULL, NULL, NULL, NULL),
+(73, 20, NULL, NULL, NULL, NULL),
+(74, 20, NULL, NULL, NULL, NULL),
+(75, 20, NULL, NULL, NULL, NULL),
+(76, 20, NULL, NULL, NULL, NULL),
+(77, 20, NULL, NULL, NULL, NULL),
+(78, 20, NULL, NULL, NULL, NULL),
+(79, 20, NULL, NULL, NULL, NULL),
+(80, 20, NULL, NULL, NULL, NULL),
+(81, 20, NULL, NULL, NULL, NULL),
+(82, 20, NULL, NULL, NULL, NULL),
+(83, 20, NULL, NULL, NULL, NULL),
+(84, 20, NULL, NULL, NULL, NULL),
+(85, 20, NULL, NULL, NULL, NULL),
+(86, 20, NULL, NULL, NULL, NULL),
+(87, 20, NULL, NULL, NULL, NULL),
+(88, 20, NULL, NULL, NULL, NULL),
+(89, 20, NULL, NULL, NULL, NULL),
+(90, 20, NULL, NULL, NULL, NULL),
+(91, 20, NULL, NULL, NULL, NULL),
+(92, 20, NULL, NULL, NULL, NULL),
+(93, 20, NULL, NULL, NULL, NULL),
+(94, 20, NULL, NULL, NULL, NULL),
+(95, 20, NULL, NULL, NULL, NULL),
+(96, 20, NULL, NULL, NULL, NULL),
+(97, 20, NULL, NULL, NULL, NULL),
+(98, 20, NULL, NULL, NULL, NULL),
+(99, 20, NULL, NULL, NULL, NULL),
+(100, 20, NULL, NULL, NULL, NULL),
+(101, 20, NULL, NULL, NULL, NULL),
+(102, 20, NULL, NULL, NULL, NULL),
+(103, 20, NULL, NULL, NULL, NULL),
+(104, 20, NULL, NULL, NULL, NULL),
+(105, 20, NULL, NULL, NULL, NULL),
+(106, 20, NULL, NULL, NULL, NULL),
+(107, 20, NULL, NULL, NULL, NULL),
+(108, 20, NULL, NULL, NULL, NULL),
+(109, 20, NULL, NULL, NULL, NULL),
+(110, 20, NULL, NULL, NULL, NULL),
+(111, 20, NULL, NULL, NULL, NULL),
+(112, 20, NULL, NULL, NULL, NULL),
+(113, 20, NULL, NULL, NULL, NULL),
+(114, 20, NULL, NULL, NULL, NULL),
+(115, 20, NULL, NULL, NULL, NULL),
+(116, 20, NULL, NULL, NULL, NULL),
+(117, 20, NULL, NULL, NULL, NULL),
+(118, 20, NULL, NULL, NULL, NULL),
+(119, 20, NULL, NULL, NULL, NULL),
+(120, 20, NULL, NULL, NULL, NULL),
+(121, 20, NULL, NULL, NULL, NULL),
+(122, 20, NULL, NULL, NULL, NULL),
+(123, 20, NULL, NULL, NULL, NULL),
+(124, 20, NULL, NULL, NULL, NULL),
+(125, 20, NULL, NULL, NULL, NULL),
+(126, 20, NULL, NULL, NULL, NULL),
+(127, 20, NULL, NULL, NULL, NULL),
+(128, 20, NULL, NULL, NULL, NULL),
+(129, 20, NULL, NULL, NULL, NULL),
+(130, 20, NULL, NULL, NULL, NULL),
+(131, 20, NULL, NULL, NULL, NULL),
+(132, 20, NULL, NULL, NULL, NULL),
+(133, 20, NULL, NULL, NULL, NULL),
+(134, 20, NULL, NULL, NULL, NULL),
+(135, 20, NULL, NULL, NULL, NULL),
+(136, 20, NULL, NULL, NULL, NULL),
+(137, 20, NULL, NULL, NULL, NULL),
+(138, 20, NULL, NULL, NULL, NULL),
+(139, 20, NULL, NULL, NULL, NULL),
+(140, 20, NULL, NULL, NULL, NULL),
+(141, 20, NULL, NULL, NULL, NULL),
+(142, 20, NULL, NULL, NULL, NULL),
+(143, 20, NULL, NULL, NULL, NULL),
+(144, 20, NULL, NULL, NULL, NULL),
+(145, 20, NULL, NULL, NULL, NULL),
+(146, 20, NULL, NULL, NULL, NULL),
+(147, 20, NULL, NULL, NULL, NULL),
+(148, 20, NULL, NULL, NULL, NULL),
+(149, 20, NULL, NULL, NULL, NULL),
+(150, 20, NULL, NULL, NULL, NULL),
+(151, 20, NULL, NULL, NULL, NULL),
+(152, 20, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -218,19 +341,19 @@ ALTER TABLE `words`
 -- AUTO_INCREMENT for table `conlangs`
 --
 ALTER TABLE `conlangs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `editors`
 --
 ALTER TABLE `editors`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `meanings`
 --
 ALTER TABLE `meanings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `scripts`
@@ -248,7 +371,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
 -- Constraints for dumped tables
