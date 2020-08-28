@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2020 at 02:48 AM
+-- Generation Time: Aug 28, 2020 at 02:42 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -44,8 +44,9 @@ INSERT INTO `conlangs` (`id`, `name`, `name_romanised`, `script_id`, `pronunciat
 (2, 'heizi', 'Heizi', 1, NULL),
 (3, 'Proto-Tineba', NULL, NULL, NULL),
 (4, 'ᚾᛟᚱᛖᚾᛋ', 'Norens', NULL, NULL),
-(19, 'The Homophonic Language', '', NULL, ''),
-(20, 'scroll test', '', NULL, '');
+(19, 'The Homophonic Language', '', 5, ''),
+(20, 'scroll test', '', NULL, ''),
+(21, 'demoscript', '', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -69,7 +70,8 @@ INSERT INTO `editors` (`id`, `user_id`, `conlang_id`) VALUES
 (3, 8, 2),
 (4, 6, 2),
 (44, 6, 19),
-(45, 6, 20);
+(45, 6, 20),
+(46, 6, 21);
 
 -- --------------------------------------------------------
 
@@ -125,15 +127,16 @@ INSERT INTO `meanings` (`id`, `word_id`, `pos`, `english`, `meaning`, `example`,
 CREATE TABLE `scripts` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
-  `editors` text NOT NULL
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `scripts`
 --
 
-INSERT INTO `scripts` (`id`, `name`, `editors`) VALUES
-(1, 'kaspak', 'domidoodle');
+INSERT INTO `scripts` (`id`, `name`, `user_id`) VALUES
+(1, 'kaspak', 6),
+(5, 'sga2', 6);
 
 -- --------------------------------------------------------
 
@@ -285,7 +288,12 @@ INSERT INTO `words` (`id`, `conlang_id`, `name`, `name_romanised`, `pronunciatio
 (149, 20, NULL, NULL, NULL, NULL),
 (150, 20, NULL, NULL, NULL, NULL),
 (151, 20, NULL, NULL, NULL, NULL),
-(152, 20, NULL, NULL, NULL, NULL);
+(152, 20, NULL, NULL, NULL, NULL),
+(153, 19, 'SCRIPTS WORK, THIS IS SO COOL', 'nice', 'eeeeeeee', NULL),
+(154, 20, NULL, NULL, NULL, NULL),
+(155, 20, NULL, NULL, NULL, NULL),
+(157, 20, NULL, NULL, NULL, NULL),
+(159, 20, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -317,7 +325,8 @@ ALTER TABLE `meanings`
 -- Indexes for table `scripts`
 --
 ALTER TABLE `scripts`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `users`
@@ -341,13 +350,13 @@ ALTER TABLE `words`
 -- AUTO_INCREMENT for table `conlangs`
 --
 ALTER TABLE `conlangs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `editors`
 --
 ALTER TABLE `editors`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `meanings`
@@ -359,7 +368,7 @@ ALTER TABLE `meanings`
 -- AUTO_INCREMENT for table `scripts`
 --
 ALTER TABLE `scripts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -371,7 +380,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
 
 --
 -- Constraints for dumped tables
@@ -395,6 +404,12 @@ ALTER TABLE `editors`
 --
 ALTER TABLE `meanings`
   ADD CONSTRAINT `meanings_ibfk_1` FOREIGN KEY (`word_id`) REFERENCES `words` (`id`);
+
+--
+-- Constraints for table `scripts`
+--
+ALTER TABLE `scripts`
+  ADD CONSTRAINT `scripts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `words`
