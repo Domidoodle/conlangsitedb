@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 20, 2020 at 03:26 AM
+-- Generation Time: Oct 29, 2020 at 11:39 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -31,18 +31,20 @@ CREATE TABLE `conlangs` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `name_romanised` text DEFAULT NULL,
-  `script_id` int(11) DEFAULT NULL
+  `script_id` int(11) DEFAULT NULL,
+  `pronunciation` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `conlangs`
 --
 
-INSERT INTO `conlangs` (`id`, `name`, `name_romanised`, `script_id`) VALUES
-(1, 'dossin', 'Dossin', 1),
-(2, 'heizi', 'Heizi', 1),
-(3, 'Proto-Tineba', NULL, NULL),
-(4, 'ᚾᛟᚱᛖᚾᛋ', 'Norens', NULL);
+INSERT INTO `conlangs` (`id`, `name`, `name_romanised`, `script_id`, `pronunciation`) VALUES
+(1, 'dossin', 'Dossin', 1, NULL),
+(2, 'heizi', 'Heizi', 1, NULL),
+(3, 'Proto-Tineba', NULL, NULL, NULL),
+(4, 'ᚾᛟᚱᛖᚾᛋ', 'Norens', NULL, NULL),
+(5, 'sfdfd', '', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -64,7 +66,8 @@ INSERT INTO `editors` (`id`, `user_id`, `conlang_id`) VALUES
 (1, 6, 1),
 (2, 7, 4),
 (3, 8, 2),
-(4, 6, 2);
+(4, 6, 2),
+(8, 6, 5);
 
 -- --------------------------------------------------------
 
@@ -178,7 +181,8 @@ INSERT INTO `words` (`id`, `conlang_id`, `name`, `name_romanised`, `pronunciatio
 (40, 1, 'cauz', 'cauz', 'cauz', NULL),
 (41, 1, 'jouvo', 'jouvo', 'jouvo', NULL),
 (42, 1, NULL, NULL, NULL, NULL),
-(43, 1, 'kdfndsjfnd', NULL, NULL, NULL);
+(43, 1, 'kdfndsjfnd', NULL, NULL, NULL),
+(44, 1, 'dvdxvdfxvdfxv', NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -235,13 +239,13 @@ ALTER TABLE `words`
 -- AUTO_INCREMENT for table `conlangs`
 --
 ALTER TABLE `conlangs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `editors`
 --
 ALTER TABLE `editors`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `meanings`
@@ -265,7 +269,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- Constraints for dumped tables
